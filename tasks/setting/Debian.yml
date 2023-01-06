@@ -1,0 +1,8 @@
+---
+# code: language=ansible
+- name: Create/update setting file
+  ansible.builtin.template:
+    src: entry.j2
+    dest: /erc/logrotate.d/{{ item.name }}
+    mode: "0644"
+  loop: "{{ logrotate_entries }}"

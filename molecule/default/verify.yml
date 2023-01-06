@@ -1,0 +1,35 @@
+---
+# code: language=ansible
+- name: Verify
+  hosts: all
+  gather_facts: false
+  check_mode: true
+  become: true
+  tasks:
+    - name: Example assertion
+      ansible.builtin.assert:
+        that: true
+    ## パッケージのテスト
+    - name: Gather the package facts
+      ansible.builtin.package_facts:
+        manager: auto
+    - name: Assert package
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.packages['logrotate'] is defined
+    ## サービスのテスト
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+    - name: Assert service
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.services['logrotate.service'] is defined
+    # ファイルのテスト
+    - name: Check logrotate entry
+      ansible.builtin.stat:
+        path: /etc/logrotate.d/sample
+      register: result
+    - name: Assert file
+      ansible.builtin.assert:
+        that:
+          - result.stat.exists

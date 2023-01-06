@@ -1,0 +1,8 @@
+---
+## -----------------
+## インストールするパッケージ
+## -----------------
+logrotate_packages:
+  - logrotate
+
+logrotate_entries: []
