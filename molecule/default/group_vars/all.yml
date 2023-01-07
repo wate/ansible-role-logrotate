@@ -1,5 +1,5 @@
 ---
-logrotate_entries:
+logrotate_settings:
   - name: nginx
     paths:
       - /var/log/nginx/*.log
