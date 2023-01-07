@@ -1,20 +1,5 @@
 ---
 # code: language=ansible
-- name: Find pratform variable file
-  ansible.builtin.set_fact:
-    variable_file: "{{ lookup('first_found', params, errors='ignore') }}"
-  vars:
-    params:
-      files:
-        - "{{ ansible_facts.os_family }}/{{ ansible_facts.distribution }}/{{ ansible_facts.distribution_major_version }}.yml"
-        - "{{ ansible_facts.os_family }}/{{ ansible_facts.distribution }}.yml"
-        - "{{ ansible_facts.os_family }}.yml"
-      paths:
-        - vars
-- name: Include variable file
-  ansible.builtin.include_vars:
-    file: "{{ variable_file }}"
-  when: variable_file | length > 0
 - name: Include package task
   ansible.builtin.import_tasks:
     file: package.yml
@@ -23,7 +8,3 @@
   ansible.builtin.import_tasks:
     file: setting.yml
   tags: setting
-- name: Include service task
-  ansible.builtin.import_tasks:
-    file: service.yml
-  tags: service

@@ -27,7 +27,7 @@
     # ファイルのテスト
     - name: Check logrotate entry
       ansible.builtin.stat:
-        path: /etc/logrotate.d/sample
+        path: /etc/logrotate.d/test1
       register: result
     - name: Assert file
       ansible.builtin.assert:

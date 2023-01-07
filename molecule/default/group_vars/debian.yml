@@ -1,1 +1,20 @@
 ---
+logrotate_entries:
+  - name: test1
+    path: /var/log/test1.log
+  - name: test2
+    path: /var/log/test2.log
+  - name: test3
+    path: /var/log/test3.log
+  - name: test4
+    path: /var/log/test4.log
+  - name: test5
+    path: /var/log/test5.log
+  - name: test6
+    path: /var/log/test6.log
+  - name: test7
+    path: /var/log/test7.log
+  - name: test8
+    path: /var/log/test8.log
+  - name: test9
+    path: /var/log/test9.log
