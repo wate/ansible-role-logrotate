@@ -2,7 +2,7 @@
 ## -----------------
 ## logrotateの設定
 ## -----------------
-logrotate_settings:
+logrotate_settings: []
   # - name: nginx
   #   paths:
   #     - /var/log/nginx/*.log
