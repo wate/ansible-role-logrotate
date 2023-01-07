@@ -4,37 +4,37 @@
 {% if item.frequency is defined -%}
     {{ item.frequency }}
 {% endif %}
-{% if item.compress is defined and item.compress -%}
+{% if item.compress is defined and item.compress %}
     compress
 {% endif %}
-{% if item.delaycompress is defined and item.delaycompress -%}
+{% if item.delaycompress is defined and item.delaycompress %}
     delaycompress
 {% endif %}
-{% if item.rotate is defined -%}
+{% if item.rotate is defined %}
     rotate {{ item.rotate }}
 {% endif %}
-{% if item.minsize is defined -%}
+{% if item.minsize is defined %}
     minsize {{ item.minsize }}
 {% endif %}
-{% if item.missingok is defined and item.missingok -%}
+{% if item.missingok is defined and item.missingok %}
     missingok
 {% endif %}
-{% if item.nomissingok is defined and item.nomissingok -%}
+{% if item.nomissingok is defined and item.nomissingok %}
     nomissingok
 {% endif %}
-{% if item.notifempty is defined and item.notifempty -%}
+{% if item.notifempty is defined and item.notifempty %}
     notifempty
 {% endif %}
-{% if item.copy is defined and item.copy -%}
+{% if item.copy is defined and item.copy %}
     copy
 {% endif %}
-{% if item.copytruncate is defined and item.copytruncate -%}
+{% if item.copytruncate is defined and item.copytruncate %}
     copytruncate
 {% endif %}
-{% if item.create is defined and item.create -%}
-{% set create_directive = 'create' -%}
-{% if item.create_mode is defined -%}
-{% set create_directive = create_directive ~ ' ' ~ item.create_mode %}
+{% if item.create is defined and item.create %}
+{% set create_directive = 'create' %}
+{% if item.create_mode is defined %}
+{% set create_directive = create_directive ~ ' ' ~ item.create_mode -%}
 {% endif %}
 {% if item.create_user is defined -%}
   {% set create_directive = create_directive ~ ' ' ~ item.create_user -%}
@@ -44,21 +44,21 @@
 {% endif %}
     {{ create_directive }}
 {% endif %}
-{% if item.sharedscripts is defined and item.sharedscripts -%}
+{% if item.sharedscripts is defined and item.sharedscripts %}
     sharedscripts
 {% endif %}
-{% if item.dateext is defined and item.dateext -%}
+{% if item.dateext is defined and item.dateext %}
     dateext
 {% endif %}
-{% if item.dateformat is defined and item.dateformat -%}
+{% if item.dateformat is defined and item.dateformat %}
     dateformat {{ item.dateformat }}
 {% endif %}
-{% if item.prerotate is defined -%}
+{% if item.prerotate is defined %}
     prerotate
         {{ item.prerotate | indent(8) }}
     endscript
 {% endif %}
-{% if item.postrotate is defined -%}
+{% if item.postrotate is defined %}
     postrotate
         {{ item.postrotate | indent(8) }}
     endscript

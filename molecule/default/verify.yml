@@ -25,11 +25,19 @@
         that:
           - ansible_facts.services['logrotate.service'] is defined
     # ファイルのテスト
-    - name: Check logrotate entry
+    - name: Check logrotate entry(nginx)
       ansible.builtin.stat:
-        path: /etc/logrotate.d/test1
+        path: /etc/logrotate.d/nginx
       register: result
-    - name: Assert file
+    - name: Assert file(nginx logrotate setting)
+      ansible.builtin.assert:
+        that:
+          - result.stat.exists
+    - name: Check logrotate entry(mariadb)
+      ansible.builtin.stat:
+        path: /etc/logrotate.d/mariadb
+      register: result
+    - name: Assert file(mariadb logrotate setting)
       ansible.builtin.assert:
         that:
           - result.stat.exists

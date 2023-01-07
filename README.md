@@ -14,9 +14,9 @@ OS Platform
 Role Variables
 --------------
 
-### `logrotate_packages`
+### `logrotate_settings`
 
-インストールするパッケージ
+logrotateの設定
 
 Example Playbook
 --------------
