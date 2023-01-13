@@ -32,9 +32,6 @@
       ansible.builtin.assert:
         that:
           - result.stat.exists
-    - name: Execute logrotate
-      ansible.builtin.command:
-        cmd: logrotate -dv /etc/logrotate.d/nginx
     - name: Check logrotate entry(MariaDB)
       ansible.builtin.stat:
         path: /etc/logrotate.d/mariadb
@@ -43,9 +40,6 @@
       ansible.builtin.assert:
         that:
           - result.stat.exists
-    - name: Execute logrotate
-      ansible.builtin.command:
-        cmd: logrotate -dv /etc/logrotate.d/mariadb
     - name: Check logrotate entry(Apache)
       ansible.builtin.stat:
         path: /etc/logrotate.d/apache2
@@ -54,6 +48,3 @@
       ansible.builtin.assert:
         that:
           - result.stat.exists
-    - name: Eexecute logrotate
-      ansible.builtin.command:
-        cmd: logrotate -dv /etc/logrotate.d/apache2
