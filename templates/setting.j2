@@ -1,6 +1,6 @@
 {{ ansible_managed | comment }}
 
-{{ item.paths | join(' ') }} {
+{{ item.paths | join("\n") }} {
 {% if item.frequency is defined %}
     {{ item.frequency }}
 {% endif %}

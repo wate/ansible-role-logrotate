@@ -3,7 +3,6 @@
 - name: Verify
   hosts: all
   gather_facts: false
-  check_mode: true
   become: true
   tasks:
     - name: Example assertion
@@ -25,19 +24,36 @@
         that:
           - ansible_facts.services['logrotate.service'] is defined
     # ファイルのテスト
-    - name: Check logrotate entry(nginx)
+    - name: Check logrotate entry(Nginx)
       ansible.builtin.stat:
         path: /etc/logrotate.d/nginx
       register: result
-    - name: Assert file(nginx logrotate setting)
+    - name: Assert file(Nginx logrotate setting)
       ansible.builtin.assert:
         that:
           - result.stat.exists
-    - name: Check logrotate entry(mariadb)
+    - name: Execute logrotate
+      ansible.builtin.command:
+        cmd: logrotate -dv /etc/logrotate.d/nginx
+    - name: Check logrotate entry(MariaDB)
       ansible.builtin.stat:
         path: /etc/logrotate.d/mariadb
       register: result
-    - name: Assert file(mariadb logrotate setting)
+    - name: Assert file(MariaDB logrotate setting)
       ansible.builtin.assert:
         that:
           - result.stat.exists
+    - name: Execute logrotate
+      ansible.builtin.command:
+        cmd: logrotate -dv /etc/logrotate.d/mariadb
+    - name: Check logrotate entry(Apache)
+      ansible.builtin.stat:
+        path: /etc/logrotate.d/apache2
+      register: result
+    - name: Assert file(Apache logrotate setting)
+      ansible.builtin.assert:
+        that:
+          - result.stat.exists
+    - name: Eexecute logrotate
+      ansible.builtin.command:
+        cmd: logrotate -dv /etc/logrotate.d/apache2
