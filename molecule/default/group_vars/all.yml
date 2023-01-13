@@ -19,6 +19,28 @@ logrotate_settings:
         run-parts /etc/logrotate.d/httpd-prerotate; \
       fi \
     postrotate: invoke-rc.d nginx rotate >/dev/null 2>&1
+  - name: apache2
+    paths:
+      - /var/log/apache2/*.log
+    frequency: daily
+    missingok: true
+    rotate: 14
+    compress: true
+    delaycompress: true
+    notifempty: true
+    create: true
+    create_mode: "0640"
+    create_user: root
+    create_group: adm
+    sharedscripts: true
+    prerotate: |
+      if [ -d /etc/logrotate.d/httpd-prerotate ]; then
+          run-parts /etc/logrotate.d/httpd-prerotate
+      fi
+    postrotate: |
+      if pgrep -f ^/usr/sbin/apache2 > /dev/null; then
+          invoke-rc.d apache2 reload 2>&1 | logger -t apache2.logrotate
+      fi
   - name: mariadb
     paths:
       - /var/lib/mysql/mysqld.log
@@ -43,3 +65,42 @@ logrotate_settings:
         /usr/bin/mariadb-admin $EXTRAPARAM --local flush-error-log \
           flush-engine-log flush-general-log flush-slow-log
       fi
+  - name: max_params
+    paths:
+      - /var/log/syslog
+      - /var/log/mail.info
+      - /var/log/mail.warn
+      - /var/log/mail.err
+      - /var/log/mail.log
+      - /var/log/daemon.log
+      - /var/log/kern.log
+      - /var/log/auth.log
+      - /var/log/user.log
+      - /var/log/lpr.log
+      - /var/log/cron.log
+      - /var/log/debug
+      - /var/log/cron.log
+      - /var/log/messages
+    ## optional
+    frequency: daily
+    compress: true
+    delaycompress: true
+    rotate: 14
+    minsize: 500M
+    missingok: true
+    nomissingok: true
+    notifempty: true
+    copy: true
+    copytruncate: true
+    create: true
+    create_mode: "0640"
+    create_user: www-data
+    create_group: adm
+    sharedscripts: true
+    dateext: true
+    dateformat: -%Y%m%d
+    prerotate: |
+      if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+        run-parts /etc/logrotate.d/httpd-prerotate; \
+      fi \
+    postrotate: invoke-rc.d nginx rotate >/dev/null 2>&1

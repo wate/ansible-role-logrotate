@@ -1,13 +1,13 @@
 {{ ansible_managed | comment }}
 
 {{ item.paths | join(' ') }} {
-{% if item.frequency is defined -%}
+{% if item.frequency is defined %}
     {{ item.frequency }}
 {% endif %}
-{% if item.compress is defined and item.compress %}
+{% if item.compress | default(false) %}
     compress
 {% endif %}
-{% if item.delaycompress is defined and item.delaycompress %}
+{% if item.delaycompress | default(false) %}
     delaycompress
 {% endif %}
 {% if item.rotate is defined %}
@@ -16,19 +16,19 @@
 {% if item.minsize is defined %}
     minsize {{ item.minsize }}
 {% endif %}
-{% if item.missingok is defined and item.missingok %}
+{% if item.missingok | default(false) %}
     missingok
 {% endif %}
-{% if item.nomissingok is defined and item.nomissingok %}
+{% if item.nomissingok | default(false) %}
     nomissingok
 {% endif %}
-{% if item.notifempty is defined and item.notifempty %}
+{% if item.notifempty | default(false) %}
     notifempty
 {% endif %}
-{% if item.copy is defined and item.copy %}
+{% if item.copy | default(false) %}
     copy
 {% endif %}
-{% if item.copytruncate is defined and item.copytruncate %}
+{% if item.copytruncate | default(false) %}
     copytruncate
 {% endif %}
 {% if item.create is defined and item.create %}
@@ -44,23 +44,23 @@
 {% endif %}
     {{ create_directive }}
 {% endif %}
-{% if item.sharedscripts is defined and item.sharedscripts %}
+{% if item.sharedscripts | default(false) %}
     sharedscripts
 {% endif %}
-{% if item.dateext is defined and item.dateext %}
+{% if item.dateext | default(false) %}
     dateext
 {% endif %}
-{% if item.dateformat is defined and item.dateformat %}
+{% if item.dateformat | default(false) %}
     dateformat {{ item.dateformat }}
 {% endif %}
 {% if item.prerotate is defined %}
     prerotate
-        {{ item.prerotate | indent(8) }}
+        {{ item.prerotate | trim | indent(8) }}
     endscript
 {% endif %}
 {% if item.postrotate is defined %}
     postrotate
-        {{ item.postrotate | indent(8) }}
+        {{ item.postrotate | trim | indent(8) }}
     endscript
 {% endif %}
 }

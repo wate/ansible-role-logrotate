@@ -6,3 +6,5 @@
     dest: /etc/logrotate.d/{{ item.name }}
     mode: "0644"
   loop: "{{ logrotate_settings }}"
+  loop_control:
+    label: "{{ item.name }}"
