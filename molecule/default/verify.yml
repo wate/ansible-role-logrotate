@@ -23,7 +23,7 @@
       ansible.builtin.assert:
         that:
           - ansible_facts.services['logrotate.service'] is defined
-    # ファイルのテスト
+    # 設定ファイルのテスト
     - name: Check logrotate entry(Nginx)
       ansible.builtin.stat:
         path: /etc/logrotate.d/nginx
@@ -32,6 +32,15 @@
       ansible.builtin.assert:
         that:
           - result.stat.exists
+    - name: Execute force logrotate
+      ansible.builtin.command:
+        cmd: logrotate /etc/logrotate.d/nginx -f -v
+      changed_when: false
+      register: result
+    - name: Assert exet code
+      ansible.builtin.assert:
+        that:
+          - result.rc == 0
     - name: Check logrotate entry(MariaDB)
       ansible.builtin.stat:
         path: /etc/logrotate.d/mariadb
@@ -40,6 +49,15 @@
       ansible.builtin.assert:
         that:
           - result.stat.exists
+    - name: Execute force logrotate
+      ansible.builtin.command:
+        cmd: logrotate /etc/logrotate.d/mariadb -f -v
+      changed_when: false
+      register: result
+    - name: Assert exet code
+      ansible.builtin.assert:
+        that:
+          - result.rc == 0
     - name: Check logrotate entry(Apache)
       ansible.builtin.stat:
         path: /etc/logrotate.d/apache2
@@ -48,3 +66,12 @@
       ansible.builtin.assert:
         that:
           - result.stat.exists
+    - name: Execute force logrotate
+      ansible.builtin.command:
+        cmd: logrotate /etc/logrotate.d/apache2 -f -v
+      changed_when: false
+      register: result
+    - name: Assert exet code
+      ansible.builtin.assert:
+        that:
+          - result.rc == 0

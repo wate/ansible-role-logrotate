@@ -52,6 +52,8 @@ logrotate_settings:
     frequency: monthly
     compress: true
     delaycompress: true
+    missingok: true
+    notifempty: true
     rotate: 6
     maxsize: 500M
     sharedscripts: true
