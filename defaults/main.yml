@@ -2,7 +2,7 @@
 ## -----------------
 ## logrotateの設定
 ## -----------------
-logrotate_settings: []
+logrotate_settings:
   # - name: nginx
   #   paths:
   #     - /var/log/nginx/*.log
@@ -68,7 +68,8 @@ logrotate_settings: []
   #       /usr/bin/mariadb-admin $EXTRAPARAM --local flush-error-log \
   #         flush-engine-log flush-general-log flush-slow-log
   #     fi
-  # - name: max_params
+  # - name: example
+  #   ## ローテート対象のログファイル
   #   paths:
   #     - /var/log/syslog
   #     - /var/log/mail.info
@@ -84,8 +85,11 @@ logrotate_settings: []
   #     - /var/log/debug
   #     - /var/log/cron.log
   #     - /var/log/messages
-  #   ## optional
+  #   ### optional
+  #   ## ローテーションの間隔： hourly / daily / weekly [曜日] / monthly / yearly
   #   frequency: daily
+  #   ## その他のオプションの内容については以下のURLなどを参照してください。
+  #   ## @see https://hackers-high.com/linux/man-jp-logrotate/
   #   compress: true
   #   delaycompress: true
   #   rotate: 14
