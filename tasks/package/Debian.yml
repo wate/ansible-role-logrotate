@@ -1,5 +1,5 @@
 ---
 # code: language=ansible
-- name: Install logrotate packages
+- name: Install logrotate package
   ansible.builtin.apt:
     name: logrotate

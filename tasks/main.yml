@@ -1,10 +1,12 @@
 ---
 # code: language=ansible
-- name: Include package task
+- name: Import package task
   ansible.builtin.import_tasks:
     file: package.yml
-  tags: package
-- name: Include setting task
+  tags:
+    - role_logrotate_package
+- name: Import setting task
   ansible.builtin.import_tasks:
     file: setting.yml
-  tags: setting
+  tags:
+    - role_logrotate_setting
