@@ -5,20 +5,17 @@
   gather_facts: false
   become: true
   tasks:
-    - name: Example assertion
-      ansible.builtin.assert:
-        that: true
-    ## パッケージのテスト
     - name: Gather the package facts
       ansible.builtin.package_facts:
         manager: auto
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+    ## パッケージのテスト
     - name: Assert package
       ansible.builtin.assert:
         that:
           - ansible_facts.packages['logrotate'] is defined
     ## サービスのテスト
-    - name: Populate service facts
-      ansible.builtin.service_facts:
     - name: Assert service
       ansible.builtin.assert:
         that:

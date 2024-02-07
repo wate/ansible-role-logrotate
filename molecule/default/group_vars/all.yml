@@ -5,7 +5,8 @@ logrotate_settings:
       - /var/log/nginx/*.log
     frequency: daily
     missingok: true
-    rotate: 14
+    ## 14 => 32に引き上げ
+    rotate: 32
     compress: true
     delaycompress: true
     notifempty: true
@@ -24,7 +25,8 @@ logrotate_settings:
       - /var/log/apache2/*.log
     frequency: daily
     missingok: true
-    rotate: 14
+    ## 14 => 32に引き上げ
+    rotate: 32
     compress: true
     delaycompress: true
     notifempty: true
