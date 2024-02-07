@@ -3,8 +3,9 @@
 - name: Create/update setting file
   ansible.builtin.template:
     src: setting.j2
-    dest: /etc/logrotate.d/{{ item.name }}
+    dest: /etc/logrotate.d/{{ logrotate_setting.name }}
     mode: "0644"
   loop: "{{ logrotate_settings }}"
   loop_control:
-    label: "{{ item.name }}"
+    loop_var: logrotate_setting
+    label: "{{ logrotate_setting.name }}"

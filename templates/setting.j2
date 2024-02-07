@@ -1,66 +1,66 @@
 {{ ansible_managed | comment }}
 
-{{ item.paths | join("\n") }} {
-{% if item.frequency is defined %}
-    {{ item.frequency }}
+{{ logrotate_setting.paths | join("\n") }} {
+{% if logrotate_setting.frequency is defined %}
+    {{ logrotate_setting.frequency }}
 {% endif %}
-{% if item.compress | default(false) %}
+{% if logrotate_setting.compress | default(false) %}
     compress
 {% endif %}
-{% if item.delaycompress | default(false) %}
+{% if logrotate_setting.delaycompress | default(false) %}
     delaycompress
 {% endif %}
-{% if item.rotate is defined %}
-    rotate {{ item.rotate }}
+{% if logrotate_setting.rotate is defined %}
+    rotate {{ logrotate_setting.rotate }}
 {% endif %}
-{% if item.minsize is defined %}
-    minsize {{ item.minsize }}
+{% if logrotate_setting.minsize is defined %}
+    minsize {{ logrotate_setting.minsize }}
 {% endif %}
-{% if item.missingok | default(false) %}
+{% if logrotate_setting.missingok | default(false) %}
     missingok
 {% endif %}
-{% if item.nomissingok | default(false) %}
+{% if logrotate_setting.nomissingok | default(false) %}
     nomissingok
 {% endif %}
-{% if item.notifempty | default(false) %}
+{% if logrotate_setting.notifempty | default(false) %}
     notifempty
 {% endif %}
-{% if item.copy | default(false) %}
+{% if logrotate_setting.copy | default(false) %}
     copy
 {% endif %}
-{% if item.copytruncate | default(false) %}
+{% if logrotate_setting.copytruncate | default(false) %}
     copytruncate
 {% endif %}
-{% if item.create is defined and item.create %}
+{% if logrotate_setting.create is defined and logrotate_setting.create %}
 {% set create_directive = 'create' %}
-{% if item.create_mode is defined %}
-{% set create_directive = create_directive ~ ' ' ~ item.create_mode -%}
+{% if logrotate_setting.create_mode is defined %}
+{% set create_directive = create_directive ~ ' ' ~ logrotate_setting.create_mode -%}
 {% endif %}
-{% if item.create_user is defined -%}
-  {% set create_directive = create_directive ~ ' ' ~ item.create_user -%}
+{% if logrotate_setting.create_user is defined -%}
+  {% set create_directive = create_directive ~ ' ' ~ logrotate_setting.create_user -%}
 {% endif %}
-{% if item.create_group is defined -%}
-  {% set create_directive = create_directive ~ ' ' ~ item.create_group -%}
+{% if logrotate_setting.create_group is defined -%}
+  {% set create_directive = create_directive ~ ' ' ~ logrotate_setting.create_group -%}
 {% endif %}
     {{ create_directive }}
 {% endif %}
-{% if item.sharedscripts | default(false) %}
+{% if logrotate_setting.sharedscripts | default(false) %}
     sharedscripts
 {% endif %}
-{% if item.dateext | default(false) %}
+{% if logrotate_setting.dateext | default(false) %}
     dateext
 {% endif %}
-{% if item.dateformat | default(false) %}
-    dateformat {{ item.dateformat }}
+{% if logrotate_setting.dateformat | default(false) %}
+    dateformat {{ logrotate_setting.dateformat }}
 {% endif %}
-{% if item.prerotate is defined %}
+{% if logrotate_setting.prerotate is defined %}
     prerotate
-        {{ item.prerotate | trim | indent(8) }}
+        {{ logrotate_setting.prerotate | trim | indent(8) }}
     endscript
 {% endif %}
-{% if item.postrotate is defined %}
+{% if logrotate_setting.postrotate is defined %}
     postrotate
-        {{ item.postrotate | trim | indent(8) }}
+        {{ logrotate_setting.postrotate | trim | indent(8) }}
     endscript
 {% endif %}
 }
