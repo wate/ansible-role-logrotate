@@ -1,6 +1,7 @@
 ---
 ## -----------------
 ## logrotateの設定
+## @see https://hackers-high.com/linux/man-jp-logrotate/
 ## -----------------
 logrotate_settings:
   - name: nginx
@@ -91,8 +92,7 @@ logrotate_settings:
 #     ### optional
 #     ## ローテーションの間隔： hourly / daily / weekly [曜日] / monthly / yearly
 #     frequency: daily
-#     ## その他のオプションの内容については以下のURLなどを参照してください。
-#     ## @see https://hackers-high.com/linux/man-jp-logrotate/
+#     ## その他のオプションの内容については参考URLなどを参照してください。
 #     compress: true
 #     delaycompress: true
 #     rotate: 14
