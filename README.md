@@ -18,7 +18,8 @@ Role Variables
 
 ### `logrotate_settings`
 
-logrotateの設定
+logrotateの設定  
+@see https://hackers-high.com/linux/man-jp-logrotate/
 
 Example Playbook
 --------------
