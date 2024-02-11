@@ -4,10 +4,10 @@
 {% if logrotate_setting.frequency is defined %}
     {{ logrotate_setting.frequency }}
 {% endif %}
-{% if logrotate_setting.compress | default(false) %}
+{% if logrotate_setting.compress is defined and logrotate_setting.compress %}
     compress
 {% endif %}
-{% if logrotate_setting.delaycompress | default(false) %}
+{% if logrotate_setting.delaycompress is defined and logrotate_setting.delaycompress %}
     delaycompress
 {% endif %}
 {% if logrotate_setting.rotate is defined %}
@@ -16,19 +16,20 @@
 {% if logrotate_setting.minsize is defined %}
     minsize {{ logrotate_setting.minsize }}
 {% endif %}
-{% if logrotate_setting.missingok | default(false) %}
+{% if logrotate_setting.missingok is defined and logrotate_setting.missingok %}
     missingok
 {% endif %}
-{% if logrotate_setting.nomissingok | default(false) %}
+{% if logrotate_setting.nomissingok is defined and logrotate_setting.nomissingok %}
     nomissingok
 {% endif %}
-{% if logrotate_setting.notifempty | default(false) %}
+{% if logrotate_setting.notifempty is defined and logrotate_setting.notifempty %}
     notifempty
 {% endif %}
-{% if logrotate_setting.copy | default(false) %}
+{# 辞書のcopyメソッドの影響で定義済みか否かの判定がズレてしまうためcopyのみ判定方法を調整 #}
+{% if 'copy' in logrotate_setting and logrotate_setting['copy'] %}
     copy
 {% endif %}
-{% if logrotate_setting.copytruncate | default(false) %}
+{% if logrotate_setting.copytruncate is defined and logrotate_setting.copytruncate %}
     copytruncate
 {% endif %}
 {% if logrotate_setting.create is defined and logrotate_setting.create %}
@@ -44,13 +45,13 @@
 {% endif %}
     {{ create_directive }}
 {% endif %}
-{% if logrotate_setting.sharedscripts | default(false) %}
+{% if logrotate_setting.sharedscripts is defined and logrotate_setting.sharedscripts %}
     sharedscripts
 {% endif %}
-{% if logrotate_setting.dateext | default(false) %}
+{% if logrotate_setting.dateext is defined and logrotate_setting.dateext %}
     dateext
 {% endif %}
-{% if logrotate_setting.dateformat | default(false) %}
+{% if logrotate_setting.dateformat is defined %}
     dateformat {{ logrotate_setting.dateformat }}
 {% endif %}
 {% if logrotate_setting.prerotate is defined %}

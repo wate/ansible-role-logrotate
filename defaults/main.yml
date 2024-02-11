@@ -47,6 +47,19 @@ logrotate_settings:
 #       if pgrep -f ^/usr/sbin/apache2 > /dev/null; then
 #           invoke-rc.d apache2 reload 2>&1 | logger -t apache2.logrotate
 #       fi
+#   - name: redmine
+#     paths:
+#       - /opt/redmine/log/*.log
+#     frequency: daily
+#     missingok: true
+#     rotate: 14
+#     compress: true
+#     delaycompress: true
+#     notifempty: true
+#     create: true
+#     create_mode: "0644"
+#     create_user: redmine
+#     create_group: redmine
 #   - name: mariadb
 #     paths:
 #       - /var/lib/mysql/mysqld.log

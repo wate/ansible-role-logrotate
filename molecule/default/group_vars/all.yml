@@ -69,6 +69,19 @@ logrotate_settings:
         /usr/bin/mariadb-admin $EXTRAPARAM --local flush-error-log \
           flush-engine-log flush-general-log flush-slow-log
       fi
+  - name: redmine
+    paths:
+      - /opt/redmine/log/*.log
+    frequency: daily
+    missingok: true
+    rotate: 14
+    compress: true
+    delaycompress: true
+    notifempty: true
+    create: true
+    create_mode: "0644"
+    create_user: redmine
+    create_group: redmine
   - name: max_params
     paths:
       - /var/log/syslog
