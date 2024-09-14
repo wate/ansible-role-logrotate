@@ -1,67 +1,67 @@
 {{ ansible_managed | comment }}
 
-{{ logrotate_setting.paths | join("\n") }} {
-{% if logrotate_setting.frequency is defined %}
-    {{ logrotate_setting.frequency }}
+{{ setting.value.paths | join("\n") }} {
+{% if setting.value.frequency is defined %}
+    {{ setting.value.frequency }}
 {% endif %}
-{% if logrotate_setting.compress is defined and logrotate_setting.compress %}
+{% if setting.value.compress is defined and setting.value.compress %}
     compress
 {% endif %}
-{% if logrotate_setting.delaycompress is defined and logrotate_setting.delaycompress %}
+{% if setting.value.delaycompress is defined and setting.value.delaycompress %}
     delaycompress
 {% endif %}
-{% if logrotate_setting.rotate is defined %}
-    rotate {{ logrotate_setting.rotate }}
+{% if setting.value.rotate is defined %}
+    rotate {{ setting.value.rotate }}
 {% endif %}
-{% if logrotate_setting.minsize is defined %}
-    minsize {{ logrotate_setting.minsize }}
+{% if setting.value.minsize is defined %}
+    minsize {{ setting.value.minsize }}
 {% endif %}
-{% if logrotate_setting.missingok is defined and logrotate_setting.missingok %}
+{% if setting.value.missingok is defined and setting.value.missingok %}
     missingok
 {% endif %}
-{% if logrotate_setting.nomissingok is defined and logrotate_setting.nomissingok %}
+{% if setting.value.nomissingok is defined and setting.value.nomissingok %}
     nomissingok
 {% endif %}
-{% if logrotate_setting.notifempty is defined and logrotate_setting.notifempty %}
+{% if setting.value.notifempty is defined and setting.value.notifempty %}
     notifempty
 {% endif %}
 {# 辞書のcopyメソッドの影響で定義済みか否かの判定がズレてしまうためcopyのみ判定方法を調整 #}
-{% if 'copy' in logrotate_setting and logrotate_setting['copy'] %}
+{% if 'copy' in setting.value and setting.value['copy'] %}
     copy
 {% endif %}
-{% if logrotate_setting.copytruncate is defined and logrotate_setting.copytruncate %}
+{% if setting.value.copytruncate is defined and setting.value.copytruncate %}
     copytruncate
 {% endif %}
-{% if logrotate_setting.create is defined and logrotate_setting.create %}
+{% if setting.value.create is defined and setting.value.create %}
 {% set create_directive = 'create' %}
-{% if logrotate_setting.create_mode is defined %}
-{% set create_directive = create_directive ~ ' ' ~ logrotate_setting.create_mode -%}
+{% if setting.value.create_mode is defined %}
+{% set create_directive = create_directive ~ ' ' ~ setting.value.create_mode -%}
 {% endif %}
-{% if logrotate_setting.create_user is defined -%}
-  {% set create_directive = create_directive ~ ' ' ~ logrotate_setting.create_user -%}
+{% if setting.value.create_user is defined -%}
+  {% set create_directive = create_directive ~ ' ' ~ setting.value.create_user -%}
 {% endif %}
-{% if logrotate_setting.create_group is defined -%}
-  {% set create_directive = create_directive ~ ' ' ~ logrotate_setting.create_group -%}
+{% if setting.value.create_group is defined -%}
+  {% set create_directive = create_directive ~ ' ' ~ setting.value.create_group -%}
 {% endif %}
     {{ create_directive }}
 {% endif %}
-{% if logrotate_setting.sharedscripts is defined and logrotate_setting.sharedscripts %}
+{% if setting.value.sharedscripts is defined and setting.value.sharedscripts %}
     sharedscripts
 {% endif %}
-{% if logrotate_setting.dateext is defined and logrotate_setting.dateext %}
+{% if setting.value.dateext is defined and setting.value.dateext %}
     dateext
 {% endif %}
-{% if logrotate_setting.dateformat is defined %}
-    dateformat {{ logrotate_setting.dateformat }}
+{% if setting.value.dateformat is defined %}
+    dateformat {{ setting.value.dateformat }}
 {% endif %}
-{% if logrotate_setting.prerotate is defined %}
+{% if setting.value.prerotate is defined %}
     prerotate
-        {{ logrotate_setting.prerotate | trim | indent(8) }}
+        {{ setting.value.prerotate | trim | indent(8) }}
     endscript
 {% endif %}
-{% if logrotate_setting.postrotate is defined %}
+{% if setting.value.postrotate is defined %}
     postrotate
-        {{ logrotate_setting.postrotate | trim | indent(8) }}
+        {{ setting.value.postrotate | trim | indent(8) }}
     endscript
 {% endif %}
 }
