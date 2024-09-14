@@ -1,6 +1,6 @@
 ---
 logrotate_settings:
-  - name: nginx
+  nginx:
     paths:
       - /var/log/nginx/*.log
     frequency: daily
@@ -20,7 +20,7 @@ logrotate_settings:
         run-parts /etc/logrotate.d/httpd-prerotate; \
       fi \
     postrotate: invoke-rc.d nginx rotate >/dev/null 2>&1
-  - name: apache2
+  apache2:
     paths:
       - /var/log/apache2/*.log
     frequency: daily
@@ -43,7 +43,7 @@ logrotate_settings:
       if pgrep -f ^/usr/sbin/apache2 > /dev/null; then
           invoke-rc.d apache2 reload 2>&1 | logger -t apache2.logrotate
       fi
-  - name: mariadb
+  mariadb:
     paths:
       - /var/lib/mysql/mysqld.log
       - /var/log/mysql/mysql.log
@@ -69,7 +69,7 @@ logrotate_settings:
         /usr/bin/mariadb-admin $EXTRAPARAM --local flush-error-log \
           flush-engine-log flush-general-log flush-slow-log
       fi
-  - name: redmine
+  redmine:
     paths:
       - /opt/redmine/log/*.log
     frequency: daily
@@ -78,11 +78,8 @@ logrotate_settings:
     compress: true
     delaycompress: true
     notifempty: true
-    create: true
-    create_mode: "0644"
-    create_user: redmine
-    create_group: redmine
-  - name: max_params
+    copytruncate: true
+  max_params:
     paths:
       - /var/log/syslog
       - /var/log/mail.info
