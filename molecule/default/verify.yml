@@ -5,10 +5,10 @@
   gather_facts: false
   become: true
   tasks:
-    - name: Gather the package facts
+    - name: Gather package facts
       ansible.builtin.package_facts:
         manager: auto
-    - name: Populate service facts
+    - name: Gather service facts
       ansible.builtin.service_facts:
     ## パッケージのテスト
     - name: Assert package
