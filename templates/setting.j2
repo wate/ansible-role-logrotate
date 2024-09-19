@@ -32,18 +32,11 @@
 {% if setting.value.copytruncate is defined and setting.value.copytruncate %}
     copytruncate
 {% endif %}
-{% if setting.value.create is defined and setting.value.create %}
-{% set create_directive = 'create' %}
-{% if setting.value.create_mode is defined %}
-{% set create_directive = create_directive ~ ' ' ~ setting.value.create_mode -%}
+{% if setting.value.create is defined %}
+    create {{ setting.value.create.mode }} {{ setting.value.create.user }} {{ setting.value.create.group }}
 {% endif %}
-{% if setting.value.create_user is defined -%}
-  {% set create_directive = create_directive ~ ' ' ~ setting.value.create_user -%}
-{% endif %}
-{% if setting.value.create_group is defined -%}
-  {% set create_directive = create_directive ~ ' ' ~ setting.value.create_group -%}
-{% endif %}
-    {{ create_directive }}
+{% if setting.value.su is defined %}
+    su {{ setting.value.su.user }} {{ setting.value.su.group }}
 {% endif %}
 {% if setting.value.sharedscripts is defined and setting.value.sharedscripts %}
     sharedscripts

@@ -15,10 +15,10 @@ logrotate_settings:
     compress: true
     delaycompress: true
     notifempty: true
-    create: true
-    create_mode: "0640"
-    create_user: www-data
-    create_group: adm
+    create:
+      mode: "0640"
+      user: www-data
+      group: adm
     sharedscripts: true
     prerotate: |
       if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
@@ -34,10 +34,10 @@ logrotate_settings:
   #   compress: true
   #   delaycompress: true
   #   notifempty: true
-  #   create: true
-  #   create_mode: "0640"
-  #   create_user: root
-  #   create_group: adm
+  #   create:
+  #     mode: "0640"
+  #     user: root
+  #     group: adm
   #   sharedscripts: true
   #   prerotate: |
   #     if [ -d /etc/logrotate.d/httpd-prerotate ]; then
@@ -101,9 +101,7 @@ logrotate_settings:
   #     - /var/log/cron.log
   #     - /var/log/messages
   #   ### optional
-  #   ## ローテーションの間隔： hourly / daily / weekly [曜日] / monthly / yearly
   #   frequency: daily
-  #   ## その他のオプションの内容については参考URLなどを参照してください。
   #   compress: true
   #   delaycompress: true
   #   rotate: 14
@@ -113,10 +111,13 @@ logrotate_settings:
   #   notifempty: true
   #   copy: true
   #   copytruncate: true
-  #   create: true
-  #   create_mode: "0640"
-  #   create_user: www-data
-  #   create_group: adm
+  #   create:
+  #     mode: "0640"
+  #     user: www-data
+  #     group: adm
+  #   su:
+  #     user: app
+  #     group: app
   #   sharedscripts: true
   #   dateext: true
   #   dateformat: -%Y%m%d
