@@ -14,9 +14,11 @@ OS Platform
 Role Variables
 --------------
 
-設定方法の詳細については[defaults/main.yml](defaults/main.yml)のサンプルコードを参照してください。
+### [defaults/main.yml](defaults/main.yml)
 
-### `logrotate_settings`
+設定方法の詳細については[defaults/main.yml](defaults/main.yml)のサンプルコードなどを参照してください。
+
+#### `logrotate_settings`
 
 logrotateの設定  
 @see https://hackers-high.com/linux/man-jp-logrotate/
