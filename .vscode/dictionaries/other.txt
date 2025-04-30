@@ -1,0 +1,15 @@
+copytruncate
+dateext
+dateformat
+delaycompress
+endscript
+EXTRAPARAM
+maxsize
+minsize
+missingok
+mysqld
+nomissingok
+notifempty
+postrotate
+prerotate
+sharedscripts
