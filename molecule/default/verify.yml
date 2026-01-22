@@ -15,11 +15,15 @@
       ansible.builtin.assert:
         that:
           - ansible_facts.packages['logrotate'] is defined
+        fail_msg: "logrotate package is not installed"
+        success_msg: "logrotate package is installed"
     ## サービスのテスト
     - name: Assert service
       ansible.builtin.assert:
         that:
           - ansible_facts.services['logrotate.service'] is defined
+        fail_msg: "logrotate.service is not defined"
+        success_msg: "logrotate.service is defined"
     # 設定ファイルのテスト
     - name: Check logrotate entry(Nginx)
       ansible.builtin.stat:
@@ -29,15 +33,19 @@
       ansible.builtin.assert:
         that:
           - result.stat.exists
+        fail_msg: "Nginx logrotate setting file does not exist"
+        success_msg: "Nginx logrotate setting file exists"
     - name: Execute force logrotate
       ansible.builtin.command:
         cmd: logrotate /etc/logrotate.d/nginx -f -v
       changed_when: false
       register: result
-    - name: Assert exet code
+    - name: Assert exec code
       ansible.builtin.assert:
         that:
           - result.rc == 0
+        fail_msg: "Nginx logrotate execution failed"
+        success_msg: "Nginx logrotate execution succeeded"
     - name: Check logrotate entry(MariaDB)
       ansible.builtin.stat:
         path: /etc/logrotate.d/mariadb
@@ -46,15 +54,19 @@
       ansible.builtin.assert:
         that:
           - result.stat.exists
+        fail_msg: "MariaDB logrotate setting file does not exist"
+        success_msg: "MariaDB logrotate setting file exists"
     - name: Execute force logrotate
       ansible.builtin.command:
         cmd: logrotate /etc/logrotate.d/mariadb -f -v
       changed_when: false
       register: result
-    - name: Assert exet code
+    - name: Assert exec code
       ansible.builtin.assert:
         that:
           - result.rc == 0
+        fail_msg: "MariaDB logrotate execution failed"
+        success_msg: "MariaDB logrotate execution succeeded"
     - name: Check logrotate entry(Apache)
       ansible.builtin.stat:
         path: /etc/logrotate.d/apache2
@@ -63,12 +75,16 @@
       ansible.builtin.assert:
         that:
           - result.stat.exists
+        fail_msg: "Apache logrotate setting file does not exist"
+        success_msg: "Apache logrotate setting file exists"
     - name: Execute force logrotate
       ansible.builtin.command:
         cmd: logrotate /etc/logrotate.d/apache2 -f -v
       changed_when: false
       register: result
-    - name: Assert exet code
+    - name: Assert exec code
       ansible.builtin.assert:
         that:
           - result.rc == 0
+        fail_msg: "Apache logrotate execution failed"
+        success_msg: "Apache logrotate execution succeeded"
