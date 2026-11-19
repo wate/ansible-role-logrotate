@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   role_name: logrotate
+  namespace: wate
   author: yoshiaki tanaka
   description: configure logrotate
   license: Apache
